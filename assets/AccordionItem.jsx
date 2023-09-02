@@ -6,26 +6,14 @@ function AccordionItem({ index, title, text }) {
         setDropDown(!dropDown)
     }
 
-    if (dropDown) {
-        return (
-            <div className="item">
-                <span className={'number'}>{index < 10 ? `0${index + 1}` : index}</span>
-                <span className="title">{title}</span>
-                <icon className="icon" onClick={handleDropDown}>+</icon>
-            </div>
-        )
-    } else {
-        return (
-            <div className="item open text" style={{color: '#087f5b'}}>
-                <span className={'number'}>{index < 10 ? `0${index + 1}` : index}</span>
-                <span className="title">{title}</span>
-                <icon className="icon" onClick={handleDropDown}>-</icon>
-                <div className="content-box">
-                    <ul>{text}</ul>
-                </div>
-            </div>
-        )
-    }
+    return (
+        <div className={`item ${dropDown? 'open' : ''}`} onClick={handleDropDown}>
+            <span className={'number'}>{index < 10 ? `0${index + 1}` : index}</span>
+            <span className="title">{title}</span>
+            <icon className="icon">{dropDown ? '-' : '+'}</icon>
+            {dropDown && <div className="content-box">{text}</div>}
+        </div>
+    )
 }
 
 export default AccordionItem
